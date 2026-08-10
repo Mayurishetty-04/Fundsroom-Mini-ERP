@@ -1,5 +1,9 @@
+
 import express from "express";
 import cors from "cors";
+import authRoutes from "./routes/auth.routes";
+import customerRoutes from "./routes/customer.routes";
+
 
 const app = express();
 
@@ -12,5 +16,8 @@ app.get("/api/health", (req, res) => {
     message: "Fundsroom ERP API is running"
   });
 });
+
+app.use("/api/auth", authRoutes);
+app.use("/api/customers", customerRoutes);
 
 export default app;
