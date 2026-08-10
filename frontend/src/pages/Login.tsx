@@ -25,12 +25,7 @@ function Login() {
         }
       );
 
-      const token = response.data?.data?.token;
-
-      if (!token) {
-        setError("Login successful, but token was not received.");
-        return;
-      }
+      const token = response.data.data.token;
 
       localStorage.setItem("token", token);
 
@@ -48,6 +43,7 @@ function Login() {
     <div className="login-container">
       <form className="login-form" onSubmit={handleLogin}>
         <h1>FundsRoom ERP</h1>
+
         <h2>Login</h2>
 
         <input

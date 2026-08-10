@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import api from "../services/api";
 import type { Customer } from "../types/customer";
 
-
 const Customers = () => {
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [search, setSearch] = useState("");
@@ -24,9 +23,14 @@ const Customers = () => {
         },
       });
 
-      setCustomers(response.data.data || []);
+      setCustomers(
+        response.data.data?.customers ||
+        response.data.data ||
+        []
+      );
     } catch (error) {
       console.error("Failed to fetch customers", error);
+      setCustomers([]);
     } finally {
       setLoading(false);
     }
@@ -38,6 +42,7 @@ const Customers = () => {
 
   return (
     <div style={{ padding: "30px" }}>
+      {/* Header */}
       <div
         style={{
           display: "flex",
@@ -53,6 +58,7 @@ const Customers = () => {
         </Link>
       </div>
 
+      {/* Search */}
       <input
         type="text"
         placeholder="Search customers..."
@@ -68,6 +74,7 @@ const Customers = () => {
         }}
       />
 
+      {/* Customer List */}
       {loading ? (
         <p>Loading customers...</p>
       ) : customers.length === 0 ? (
@@ -96,17 +103,19 @@ const Customers = () => {
               <tr key={customer.id}>
                 <td>{customer.customerName}</td>
                 <td>{customer.mobile}</td>
-                <td>{customer.email}</td>
-                <td>{customer.businessName}</td>
+                <td>{customer.email || "-"}</td>
+                <td>{customer.businessName || "-"}</td>
                 <td>{customer.customerType}</td>
-                <td>{customer.status}</td>
+                <td>{customer.status || "-"}</td>
 
                 <td>
+                  {/* View */}
                   <Link to={`/customers/${customer.id}`}>
                     <button>View</button>
                   </Link>
 
-                  <Link to={`/customers/edit/${customer.id}`}>
+                  {/* Edit */}
+                  <Link to={`/customers/${customer.id}/edit`}>
                     <button style={{ marginLeft: "5px" }}>
                       Edit
                     </button>
@@ -118,6 +127,7 @@ const Customers = () => {
         </table>
       )}
 
+      {/* Pagination */}
       <div style={{ marginTop: "20px" }}>
         <button
           disabled={page === 1}

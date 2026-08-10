@@ -9,8 +9,6 @@ body {
   color: white;
 }
 
-/* Login */
-
 .login-container {
   min-height: 100vh;
   display: flex;
@@ -19,64 +17,45 @@ body {
 }
 
 .login-form {
-  width: 380px;
-  padding: 40px;
+  width: 495px;
+  padding: 45px;
   background: #1f2937;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
 }
 
 .login-form h1 {
-  margin: 0;
   text-align: center;
-  font-size: 32px;
-  line-height: 1.2;
+  margin-bottom: 15px;
+  font-size: 40px;
 }
 
 .login-form h2 {
-  margin: 10px 0 30px;
   text-align: center;
-  font-size: 22px;
-  font-weight: normal;
+  margin-bottom: 30px;
+  font-size: 28px;
 }
 
 .login-form input {
   width: 100%;
-  padding: 13px;
-  margin-bottom: 16px;
+  padding: 14px;
+  margin-bottom: 18px;
   border: 1px solid #4b5563;
-  border-radius: 6px;
+  border-radius: 5px;
   background: #374151;
   color: white;
-  font-size: 15px;
-}
-
-.login-form input::placeholder {
-  color: #9ca3af;
+  font-size: 16px;
 }
 
 .login-form button {
   width: 100%;
-  padding: 13px;
+  padding: 14px;
   border: none;
-  border-radius: 6px;
-  background: #6b7280;
-  color: white;
-  font-size: 16px;
+  border-radius: 5px;
   cursor: pointer;
-}
-
-.login-form button:hover {
-  background: #4b5563;
-}
-
-.login-form button:disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
+  font-size: 16px;
 }
 
 .error {
   color: #f87171;
-  margin: 0 0 15px;
-  text-align: center;
+  margin-bottom: 15px;
 }
