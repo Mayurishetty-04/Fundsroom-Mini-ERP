@@ -31,81 +31,112 @@ const Challans = () => {
   }, []);
 
   return (
-    <div style={{ padding: "30px" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "25px",
-        }}
-      >
-        <h1>Sales Challans</h1>
+    <div className="page-container">
+
+      <div className="page-header">
+
+        <div>
+          <h1>Sales Challans</h1>
+          <p>Create and manage sales challans.</p>
+        </div>
 
         <Link to="/challans/add">
-          <button>Create Challan</button>
+          <button className="primary-button">
+            + Create Challan
+          </button>
         </Link>
+
       </div>
 
-      {loading ? (
-        <p>Loading challans...</p>
-      ) : challans.length === 0 ? (
-        <p>No challans found.</p>
-      ) : (
-        <table
-          style={{
-            width: "100%",
-            borderCollapse: "collapse",
-          }}
-        >
-          <thead>
-            <tr>
-              <th>Challan No.</th>
-              <th>Customer</th>
-              <th>Total Quantity</th>
-              <th>Status</th>
-              <th>Created By</th>
-              <th>Date</th>
-              <th>Action</th>
-            </tr>
-          </thead>
+      <div className="content-card">
 
-          <tbody>
-            {challans.map((challan) => (
-              <tr key={challan.id}>
-                <td>{challan.challanNumber}</td>
+        {loading ? (
+          <div className="loading-state">
+            Loading challans...
+          </div>
+        ) : challans.length === 0 ? (
+          <div className="empty-state">
+            No challans found.
+          </div>
+        ) : (
+          <div className="table-container">
 
-                <td>
-                  {challan.customer?.customerName ||
-                    "-"}
-                </td>
+            <table className="data-table">
 
-                <td>{challan.totalQuantity}</td>
+              <thead>
+                <tr>
+                  <th>Challan No.</th>
+                  <th>Customer</th>
+                  <th>Total Quantity</th>
+                  <th>Status</th>
+                  <th>Created By</th>
+                  <th>Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
 
-                <td>{challan.status}</td>
+              <tbody>
 
-                <td>
-                  {challan.createdBy?.name || "-"}
-                </td>
+                {challans.map((challan) => (
+                  <tr key={challan.id}>
 
-                <td>
-                  {new Date(
-                    challan.createdAt
-                  ).toLocaleString()}
-                </td>
+                    <td>
+                      <strong>
+                        {challan.challanNumber}
+                      </strong>
+                    </td>
 
-                <td>
-                  <Link
-                    to={`/challans/${challan.id}`}
-                  >
-                    <button>View</button>
-                  </Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+                    <td>
+                      {challan.customer?.customerName ||
+                        "-"}
+                    </td>
+
+                    <td>{challan.totalQuantity}</td>
+
+                    <td>
+                      <span
+                        className={`status-badge ${
+                          challan.status === "CONFIRMED"
+                            ? "success"
+                            : "warning"
+                        }`}
+                      >
+                        {challan.status}
+                      </span>
+                    </td>
+
+                    <td>
+                      {challan.createdBy?.name || "-"}
+                    </td>
+
+                    <td>
+                      {new Date(
+                        challan.createdAt
+                      ).toLocaleString()}
+                    </td>
+
+                    <td>
+                      <Link
+                        to={`/challans/${challan.id}`}
+                      >
+                        <button className="small-button">
+                          View
+                        </button>
+                      </Link>
+                    </td>
+
+                  </tr>
+                ))}
+
+              </tbody>
+
+            </table>
+
+          </div>
+        )}
+
+      </div>
+
     </div>
   );
 };

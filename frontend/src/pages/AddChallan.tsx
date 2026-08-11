@@ -17,13 +17,8 @@ interface ChallanItemForm {
 const AddChallan = () => {
   const navigate = useNavigate();
 
-  const [customers, setCustomers] = useState<Customer[]>(
-    []
-  );
-
-  const [products, setProducts] = useState<Product[]>(
-    []
-  );
+  const [customers, setCustomers] = useState<Customer[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   const [customerId, setCustomerId] = useState("");
 
@@ -80,7 +75,9 @@ const AddChallan = () => {
     if (items.length === 1) return;
 
     setItems(
-      items.filter((_, itemIndex) => itemIndex !== index)
+      items.filter(
+        (_, itemIndex) => itemIndex !== index
+      )
     );
   };
 
@@ -128,131 +125,169 @@ const AddChallan = () => {
   };
 
   return (
-    <div style={{ padding: "30px" }}>
-      <h1>Create Sales Challan</h1>
+    <div className="page-container">
 
-      {error && (
-        <p style={{ color: "red" }}>{error}</p>
-      )}
-
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: "20px" }}>
-          <label>Customer</label>
-          <br />
-
-          <select
-            value={customerId}
-            onChange={(e) =>
-              setCustomerId(e.target.value)
-            }
-            required
-          >
-            <option value="">
-              Select Customer
-            </option>
-
-            {customers.map((customer) => (
-              <option
-                key={customer.id}
-                value={customer.id}
-              >
-                {customer.customerName}
-                {customer.businessName
-                  ? ` - ${customer.businessName}`
-                  : ""}
-              </option>
-            ))}
-          </select>
+      <div className="page-header">
+        <div>
+          <h1>Create Sales Challan</h1>
+          <p>Select a customer and add products to create a draft challan.</p>
         </div>
+      </div>
 
-        <h2>Products</h2>
+      <div className="challan-form-card">
 
-        {items.map((item, index) => (
-          <div
-            key={index}
-            style={{
-              display: "flex",
-              gap: "10px",
-              marginBottom: "10px",
-            }}
-          >
+        {error && (
+          <div className="form-error">
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit}>
+
+          <div className="challan-customer form-group">
+
+            <label>Customer *</label>
+
             <select
-              value={item.productId}
+              className="form-control"
+              value={customerId}
               onChange={(e) =>
-                updateItem(
-                  index,
-                  "productId",
-                  e.target.value
-                )
+                setCustomerId(e.target.value)
               }
               required
             >
               <option value="">
-                Select Product
+                Select Customer
               </option>
 
-              {products.map((product) => (
+              {customers.map((customer) => (
                 <option
-                  key={product.id}
-                  value={product.id}
+                  key={customer.id}
+                  value={customer.id}
                 >
-                  {product.productName} -{" "}
-                  {product.sku} (Stock:{" "}
-                  {product.currentStock})
+                  {customer.customerName}
+                  {customer.businessName
+                    ? ` - ${customer.businessName}`
+                    : ""}
                 </option>
               ))}
             </select>
 
-            <input
-              type="number"
-              min="1"
-              value={item.quantity}
-              onChange={(e) =>
-                updateItem(
-                  index,
-                  "quantity",
-                  e.target.value
-                )
-              }
-              required
-            />
+          </div>
+
+          <div className="challan-items">
+
+            <div className="page-header">
+              <div>
+                <h2>Products</h2>
+                <p>Add one or more products to this challan.</p>
+              </div>
+
+              <button
+                type="button"
+                onClick={addItem}
+              >
+                + Add Product
+              </button>
+            </div>
+
+            <div className="challan-item-header">
+              <span>Product</span>
+              <span>Quantity</span>
+              <span>Action</span>
+            </div>
+
+            {items.map((item, index) => (
+              <div
+                className="challan-item"
+                key={index}
+              >
+
+                <select
+                  className="form-control"
+                  value={item.productId}
+                  onChange={(e) =>
+                    updateItem(
+                      index,
+                      "productId",
+                      e.target.value
+                    )
+                  }
+                  required
+                >
+                  <option value="">
+                    Select Product
+                  </option>
+
+                  {products.map((product) => (
+                    <option
+                      key={product.id}
+                      value={product.id}
+                    >
+                      {product.productName} -{" "}
+                      {product.sku} (Stock:{" "}
+                      {product.currentStock})
+                    </option>
+                  ))}
+                </select>
+
+                <input
+                  className="form-control"
+                  type="number"
+                  min="1"
+                  value={item.quantity}
+                  onChange={(e) =>
+                    updateItem(
+                      index,
+                      "quantity",
+                      e.target.value
+                    )
+                  }
+                  required
+                />
+
+                <button
+                  type="button"
+                  className="secondary-button"
+                  onClick={() =>
+                    removeItem(index)
+                  }
+                  disabled={items.length === 1}
+                >
+                  Remove
+                </button>
+
+              </div>
+            ))}
+
+          </div>
+
+          <div className="form-actions">
+
+            <button
+              type="submit"
+              className="primary-button"
+              disabled={loading}
+            >
+              {loading
+                ? "Creating..."
+                : "Create Draft Challan"}
+            </button>
 
             <button
               type="button"
-              onClick={() => removeItem(index)}
+              className="secondary-button"
+              onClick={() =>
+                navigate("/challans")
+              }
             >
-              Remove
+              Cancel
             </button>
+
           </div>
-        ))}
 
-        <button
-          type="button"
-          onClick={addItem}
-          style={{ marginBottom: "20px" }}
-        >
-          + Add Product
-        </button>
-
-        <br />
-
-        <button
-          type="submit"
-          disabled={loading}
-        >
-          {loading
-            ? "Creating..."
-            : "Create Draft Challan"}
-        </button>
-
-        <button
-          type="button"
-          onClick={() => navigate("/challans")}
-          style={{ marginLeft: "10px" }}
-        >
-          Cancel
-        </button>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

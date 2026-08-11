@@ -18,8 +18,8 @@ const Products = () => {
 
       setProducts(
         response.data.data?.products ||
-        response.data.data ||
-        []
+          response.data.data ||
+          []
       );
     } catch (error) {
       console.error("Failed to fetch products", error);
@@ -34,105 +34,129 @@ const Products = () => {
   }, [search]);
 
   return (
-    <div style={{ padding: "30px" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "25px",
-        }}
-      >
-        <h1>Products & Inventory</h1>
+    <div className="page-container">
 
+      <div className="page-header">
         <div>
+          <h1>Products & Inventory</h1>
+          <p>Manage products, pricing and inventory levels.</p>
+        </div>
+
+        <div className="page-actions">
           <Link to="/products/add">
-            <button>Add Product</button>
+            <button className="primary-button">
+              + Add Product
+            </button>
           </Link>
 
           <Link to="/stock-movements">
-            <button style={{ marginLeft: "10px" }}>
+            <button>
               Stock Movements
             </button>
           </Link>
         </div>
       </div>
 
-      <input
-        type="text"
-        placeholder="Search product, SKU or category..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        style={{
-          width: "350px",
-          padding: "10px",
-          marginBottom: "20px",
-        }}
-      />
+      <div className="content-card">
 
-      {loading ? (
-        <p>Loading products...</p>
-      ) : products.length === 0 ? (
-        <p>No products found.</p>
-      ) : (
-        <table
-          style={{
-            width: "100%",
-            borderCollapse: "collapse",
-          }}
-        >
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>SKU</th>
-              <th>Category</th>
-              <th>Price</th>
-              <th>Stock</th>
-              <th>Warehouse</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
+        <div className="search-container">
+          <input
+            className="search-input"
+            type="text"
+            placeholder="Search product, SKU or category..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
 
-          <tbody>
-            {products.map((product) => {
-              const lowStock =
-                product.currentStock <=
-                product.minimumStockQuantity;
+        {loading ? (
+          <div className="loading-state">
+            Loading products...
+          </div>
+        ) : products.length === 0 ? (
+          <div className="empty-state">
+            No products found.
+          </div>
+        ) : (
+          <div className="table-container">
+            <table className="data-table">
 
-              return (
-                <tr key={product.id}>
-                  <td>{product.productName}</td>
-
-                  <td>{product.sku}</td>
-
-                  <td>{product.category}</td>
-
-                  <td>₹{Number(product.unitPrice).toFixed(2)}</td>
-
-                  <td>{product.currentStock}</td>
-
-                  <td>{product.warehouseLocation}</td>
-
-                  <td>
-                    {lowStock ? (
-                      <span>⚠ Low Stock</span>
-                    ) : (
-                      <span>In Stock</span>
-                    )}
-                  </td>
-
-                  <td>
-                    <Link to={`/products/${product.id}/edit`}>
-                      <button>Edit</button>
-                    </Link>
-                  </td>
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>SKU</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th>Warehouse</th>
+                  <th>Status</th>
+                  <th>Action</th>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      )}
+              </thead>
+
+              <tbody>
+                {products.map((product) => {
+                  const lowStock =
+                    product.currentStock <=
+                    product.minimumStockQuantity;
+
+                  return (
+                    <tr key={product.id}>
+
+                      <td>
+                        <strong>
+                          {product.productName}
+                        </strong>
+                      </td>
+
+                      <td>{product.sku}</td>
+
+                      <td>{product.category}</td>
+
+                      <td>
+                        ₹{Number(product.unitPrice).toFixed(2)}
+                      </td>
+
+                      <td>
+                        <strong>
+                          {product.currentStock}
+                        </strong>
+                      </td>
+
+                      <td>{product.warehouseLocation}</td>
+
+                      <td>
+                        {lowStock ? (
+                          <span className="status-badge warning">
+                            ⚠ Low Stock
+                          </span>
+                        ) : (
+                          <span className="status-badge success">
+                            In Stock
+                          </span>
+                        )}
+                      </td>
+
+                      <td>
+                        <Link
+                          to={`/products/${product.id}/edit`}
+                        >
+                          <button className="small-button">
+                            Edit
+                          </button>
+                        </Link>
+                      </td>
+
+                    </tr>
+                  );
+                })}
+              </tbody>
+
+            </table>
+          </div>
+        )}
+
+      </div>
     </div>
   );
 };

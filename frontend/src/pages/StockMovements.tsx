@@ -36,8 +36,8 @@ const StockMovements = () => {
 
       setProducts(
         productResponse.data.data?.products ||
-        productResponse.data.data ||
-        []
+          productResponse.data.data ||
+          []
       );
     } catch (error) {
       console.error(error);
@@ -81,152 +81,203 @@ const StockMovements = () => {
   };
 
   return (
-    <div style={{ padding: "30px" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginBottom: "25px",
-        }}
-      >
-        <h1>Stock Movements</h1>
+    <div className="page-container">
+
+      <div className="page-header">
+        <div>
+          <h1>Stock Movements</h1>
+          <p>Track inventory additions and deductions.</p>
+        </div>
 
         <Link to="/products">
           <button>Back to Products</button>
         </Link>
       </div>
 
-      <div style={{ marginBottom: "30px" }}>
+      <div className="movement-form-card">
+
         <h2>Record Stock Movement</h2>
 
         {error && (
-          <p style={{ color: "red" }}>{error}</p>
+          <div className="form-error">
+            {error}
+          </div>
         )}
 
         <form onSubmit={handleSubmit}>
-          <select
-            value={form.productId}
-            onChange={(e) =>
-              setForm({
-                ...form,
-                productId: e.target.value,
-              })
-            }
-            required
-          >
-            <option value="">Select Product</option>
 
-            {products.map((product) => (
-              <option
-                key={product.id}
-                value={product.id}
+          <div className="movement-form-grid">
+
+            <div className="form-group">
+              <label>Product</label>
+
+              <select
+                className="form-control"
+                value={form.productId}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    productId: e.target.value,
+                  })
+                }
+                required
               >
-                {product.productName} ({product.sku}) -
-                Stock: {product.currentStock}
-              </option>
-            ))}
-          </select>
+                <option value="">
+                  Select Product
+                </option>
 
-          <input
-            type="number"
-            min="1"
-            placeholder="Quantity"
-            value={form.quantity}
-            onChange={(e) =>
-              setForm({
-                ...form,
-                quantity: e.target.value,
-              })
-            }
-            required
-          />
+                {products.map((product) => (
+                  <option
+                    key={product.id}
+                    value={product.id}
+                  >
+                    {product.productName} ({product.sku}) -
+                    Stock: {product.currentStock}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          <select
-            value={form.movementType}
-            onChange={(e) =>
-              setForm({
-                ...form,
-                movementType: e.target.value,
-              })
-            }
-          >
-            <option value="IN">IN</option>
-            <option value="OUT">OUT</option>
-          </select>
+            <div className="form-group">
+              <label>Quantity</label>
 
-          <input
-            type="text"
-            placeholder="Reason"
-            value={form.reason}
-            onChange={(e) =>
-              setForm({
-                ...form,
-                reason: e.target.value,
-              })
-            }
-            required
-          />
+              <input
+                className="form-control"
+                type="number"
+                min="1"
+                placeholder="Quantity"
+                value={form.quantity}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    quantity: e.target.value,
+                  })
+                }
+                required
+              />
+            </div>
 
-          <button type="submit">
-            Record Movement
-          </button>
+            <div className="form-group">
+              <label>Type</label>
+
+              <select
+                className="form-control movement-type"
+                value={form.movementType}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    movementType: e.target.value,
+                  })
+                }
+              >
+                <option value="IN">IN</option>
+                <option value="OUT">OUT</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>Reason</label>
+
+              <input
+                className="form-control"
+                type="text"
+                placeholder="Reason for movement"
+                value={form.reason}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    reason: e.target.value,
+                  })
+                }
+                required
+              />
+            </div>
+
+            <button type="submit">
+              Record
+            </button>
+
+          </div>
+
         </form>
       </div>
 
-      <h2>Movement History</h2>
+      <div className="content-card">
 
-      {movements.length === 0 ? (
-        <p>No stock movements found.</p>
-      ) : (
-        <table
-          style={{
-            width: "100%",
-            borderCollapse: "collapse",
-          }}
-        >
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>SKU</th>
-              <th>Quantity</th>
-              <th>Type</th>
-              <th>Reason</th>
-              <th>Created By</th>
-              <th>Date</th>
-            </tr>
-          </thead>
+        <h2>Movement History</h2>
 
-          <tbody>
-            {movements.map((movement) => (
-              <tr key={movement.id}>
-                <td>
-                  {movement.product?.productName || "-"}
-                </td>
+        {movements.length === 0 ? (
+          <div className="empty-state">
+            No stock movements found.
+          </div>
+        ) : (
+          <div className="table-container">
 
-                <td>
-                  {movement.product?.sku || "-"}
-                </td>
+            <table className="data-table">
 
-                <td>{movement.quantity}</td>
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>SKU</th>
+                  <th>Quantity</th>
+                  <th>Type</th>
+                  <th>Reason</th>
+                  <th>Created By</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
 
-                <td>{movement.movementType}</td>
+              <tbody>
+                {movements.map((movement) => (
+                  <tr key={movement.id}>
 
-                <td>{movement.reason}</td>
+                    <td>
+                      <strong>
+                        {movement.product?.productName || "-"}
+                      </strong>
+                    </td>
 
-                <td>
-                  {movement.createdBy?.name || "-"}
-                </td>
+                    <td>
+                      {movement.product?.sku || "-"}
+                    </td>
 
-                <td>
-                  {new Date(
-                    movement.createdAt
-                  ).toLocaleString()}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+                    <td>{movement.quantity}</td>
+
+                    <td>
+                      <span
+                        className={`status-badge ${
+                          movement.movementType === "IN"
+                            ? "success"
+                            : "warning"
+                        }`}
+                      >
+                        {movement.movementType}
+                      </span>
+                    </td>
+
+                    <td>{movement.reason}</td>
+
+                    <td>
+                      {movement.createdBy?.name || "-"}
+                    </td>
+
+                    <td>
+                      {new Date(
+                        movement.createdAt
+                      ).toLocaleString()}
+                    </td>
+
+                  </tr>
+                ))}
+              </tbody>
+
+            </table>
+
+          </div>
+        )}
+
+      </div>
+
     </div>
   );
 };

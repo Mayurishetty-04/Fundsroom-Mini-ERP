@@ -25,8 +25,8 @@ const Customers = () => {
 
       setCustomers(
         response.data.data?.customers ||
-        response.data.data ||
-        []
+          response.data.data ||
+          []
       );
     } catch (error) {
       console.error("Failed to fetch customers", error);
@@ -41,111 +41,136 @@ const Customers = () => {
   }, [search, page]);
 
   return (
-    <div style={{ padding: "30px" }}>
-      {/* Header */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "25px",
-        }}
-      >
-        <h1>Customers</h1>
+    <div className="page-container">
+
+      <div className="page-header">
+        <div>
+          <h1>Customers</h1>
+          <p>Manage customer relationships and information.</p>
+        </div>
 
         <Link to="/customers/add">
-          <button>Add Customer</button>
+          <button className="primary-button">
+            + Add Customer
+          </button>
         </Link>
       </div>
 
-      {/* Search */}
-      <input
-        type="text"
-        placeholder="Search customers..."
-        value={search}
-        onChange={(e) => {
-          setSearch(e.target.value);
-          setPage(1);
-        }}
-        style={{
-          width: "300px",
-          padding: "10px",
-          marginBottom: "20px",
-        }}
-      />
+      <div className="content-card">
 
-      {/* Customer List */}
-      {loading ? (
-        <p>Loading customers...</p>
-      ) : customers.length === 0 ? (
-        <p>No customers found.</p>
-      ) : (
-        <table
-          style={{
-            width: "100%",
-            borderCollapse: "collapse",
-          }}
-        >
-          <thead>
-            <tr>
-              <th>Customer</th>
-              <th>Mobile</th>
-              <th>Email</th>
-              <th>Business</th>
-              <th>Type</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
+        <div className="search-container">
+          <input
+            className="search-input"
+            type="text"
+            placeholder="Search by customer, business or mobile..."
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setPage(1);
+            }}
+          />
+        </div>
 
-          <tbody>
-            {customers.map((customer) => (
-              <tr key={customer.id}>
-                <td>{customer.customerName}</td>
-                <td>{customer.mobile}</td>
-                <td>{customer.email || "-"}</td>
-                <td>{customer.businessName || "-"}</td>
-                <td>{customer.customerType}</td>
-                <td>{customer.status || "-"}</td>
+        {loading ? (
+          <div className="loading-state">
+            Loading customers...
+          </div>
+        ) : customers.length === 0 ? (
+          <div className="empty-state">
+            No customers found.
+          </div>
+        ) : (
+          <div className="table-container">
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th>Customer</th>
+                  <th>Mobile</th>
+                  <th>Email</th>
+                  <th>Business</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
 
-                <td>
-                  {/* View */}
-                  <Link to={`/customers/${customer.id}`}>
-                    <button>View</button>
-                  </Link>
+              <tbody>
+                {customers.map((customer) => (
+                  <tr key={customer.id}>
+                    <td>
+                      <strong>{customer.customerName}</strong>
+                    </td>
 
-                  {/* Edit */}
-                  <Link to={`/customers/${customer.id}/edit`}>
-                    <button style={{ marginLeft: "5px" }}>
-                      Edit
-                    </button>
-                  </Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+                    <td>{customer.mobile}</td>
 
-      {/* Pagination */}
-      <div style={{ marginTop: "20px" }}>
-        <button
-          disabled={page === 1}
-          onClick={() => setPage(page - 1)}
-        >
-          Previous
-        </button>
+                    <td>{customer.email || "-"}</td>
 
-        <span style={{ margin: "0 15px" }}>
-          Page {page}
-        </span>
+                    <td>{customer.businessName || "-"}</td>
 
-        <button
-          disabled={customers.length < limit}
-          onClick={() => setPage(page + 1)}
-        >
-          Next
-        </button>
+                    <td>
+                      <span className="status-badge info">
+                        {customer.customerType}
+                      </span>
+                    </td>
+
+                    <td>
+                      <span
+                        className={`status-badge ${
+                          customer.status === "ACTIVE"
+                            ? "success"
+                            : "warning"
+                        }`}
+                      >
+                        {customer.status || "-"}
+                      </span>
+                    </td>
+
+                    <td>
+                      <div className="action-buttons">
+                        <Link
+                          to={`/customers/${customer.id}`}
+                        >
+                          <button className="small-button">
+                            View
+                          </button>
+                        </Link>
+
+                        <Link
+                          to={`/customers/${customer.id}/edit`}
+                        >
+                          <button className="small-button">
+                            Edit
+                          </button>
+                        </Link>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        <div className="pagination">
+          <button
+            disabled={page === 1}
+            onClick={() => setPage(page - 1)}
+          >
+            Previous
+          </button>
+
+          <span className="page-number">
+            Page {page}
+          </span>
+
+          <button
+            disabled={customers.length < limit}
+            onClick={() => setPage(page + 1)}
+          >
+            Next
+          </button>
+        </div>
+
       </div>
     </div>
   );

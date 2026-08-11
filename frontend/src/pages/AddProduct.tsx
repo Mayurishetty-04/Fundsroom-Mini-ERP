@@ -57,89 +57,135 @@ const AddProduct = () => {
   };
 
   return (
-    <div style={{ padding: "30px", maxWidth: "600px" }}>
-      <h1>Add Product</h1>
+    <div className="page-container">
 
-      {error && (
-        <p style={{ color: "red" }}>{error}</p>
-      )}
-
-      <form onSubmit={handleSubmit}>
-        <input
-          name="productName"
-          placeholder="Product Name"
-          value={form.productName}
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          name="sku"
-          placeholder="SKU"
-          value={form.sku}
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          name="category"
-          placeholder="Category"
-          value={form.category}
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          name="unitPrice"
-          type="number"
-          placeholder="Unit Price"
-          value={form.unitPrice}
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          name="currentStock"
-          type="number"
-          placeholder="Initial Stock"
-          value={form.currentStock}
-          onChange={handleChange}
-          min="0"
-          required
-        />
-
-        <input
-          name="minimumStockQuantity"
-          type="number"
-          placeholder="Minimum Stock Quantity"
-          value={form.minimumStockQuantity}
-          onChange={handleChange}
-          min="0"
-          required
-        />
-
-        <input
-          name="warehouseLocation"
-          placeholder="Warehouse Location"
-          value={form.warehouseLocation}
-          onChange={handleChange}
-          required
-        />
-
-        <div style={{ marginTop: "20px" }}>
-          <button type="submit" disabled={loading}>
-            {loading ? "Saving..." : "Save Product"}
-          </button>
-
-          <button
-            type="button"
-            onClick={() => navigate("/products")}
-            style={{ marginLeft: "10px" }}
-          >
-            Cancel
-          </button>
+      <div className="page-header">
+        <div>
+          <h1>Add Product</h1>
+          <p>Create a new product and define its inventory settings.</p>
         </div>
-      </form>
+      </div>
+
+      <div className="form-card">
+
+        {error && (
+          <div className="form-error">
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit}>
+
+          <div className="form-grid">
+
+            <div className="form-group">
+              <label>Product Name *</label>
+              <input
+                name="productName"
+                placeholder="Enter product name"
+                value={form.productName}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label>SKU *</label>
+              <input
+                name="sku"
+                placeholder="e.g. KB-001"
+                value={form.sku}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Category *</label>
+              <input
+                name="category"
+                placeholder="Enter category"
+                value={form.category}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Unit Price *</label>
+              <input
+                name="unitPrice"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="0.00"
+                value={form.unitPrice}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Initial Stock *</label>
+              <input
+                name="currentStock"
+                type="number"
+                min="0"
+                placeholder="0"
+                value={form.currentStock}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Minimum Stock Quantity *</label>
+              <input
+                name="minimumStockQuantity"
+                type="number"
+                min="0"
+                placeholder="0"
+                value={form.minimumStockQuantity}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form-group full-width">
+              <label>Warehouse Location *</label>
+              <input
+                name="warehouseLocation"
+                placeholder="e.g. Warehouse A"
+                value={form.warehouseLocation}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+          </div>
+
+          <div className="form-actions">
+
+            <button
+              type="submit"
+              className="primary-button"
+              disabled={loading}
+            >
+              {loading ? "Saving..." : "Save Product"}
+            </button>
+
+            <button
+              type="button"
+              className="secondary-button"
+              onClick={() => navigate("/products")}
+            >
+              Cancel
+            </button>
+
+          </div>
+
+        </form>
+      </div>
     </div>
   );
 };

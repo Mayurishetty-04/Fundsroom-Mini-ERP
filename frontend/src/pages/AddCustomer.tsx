@@ -39,7 +39,8 @@ function AddCustomer() {
       navigate("/customers");
     } catch (error: any) {
       setError(
-        error.response?.data?.message || "Failed to add customer"
+        error.response?.data?.message ||
+          "Failed to add customer"
       );
     } finally {
       setLoading(false);
@@ -48,77 +49,121 @@ function AddCustomer() {
 
   return (
     <div className="page-container">
-      <div className="form-card">
-        <h1>Add Customer</h1>
 
-        {error && <p className="error">{error}</p>}
+      <div className="page-header">
+        <div>
+          <h1>Add Customer</h1>
+          <p>Create a new customer record.</p>
+        </div>
+      </div>
+
+      <div className="form-card">
+
+        {error && (
+          <div className="form-error">
+            {error}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit}>
-          <input
-            name="customerName"
-            placeholder="Customer Name"
-            value={form.customerName}
-            onChange={handleChange}
-            required
-          />
 
-          <input
-            name="mobile"
-            placeholder="Mobile"
-            value={form.mobile}
-            onChange={handleChange}
-            required
-          />
+          <div className="form-grid">
 
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={form.email}
-            onChange={handleChange}
-          />
+            <div className="form-group">
+              <label>Customer Name *</label>
+              <input
+                name="customerName"
+                placeholder="Enter customer name"
+                value={form.customerName}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-          <input
-            name="businessName"
-            placeholder="Business Name"
-            value={form.businessName}
-            onChange={handleChange}
-          />
+            <div className="form-group">
+              <label>Mobile *</label>
+              <input
+                name="mobile"
+                placeholder="Enter mobile number"
+                value={form.mobile}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-          <input
-            name="gstNumber"
-            placeholder="GST Number"
-            value={form.gstNumber}
-            onChange={handleChange}
-          />
+            <div className="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="customer@example.com"
+                value={form.email}
+                onChange={handleChange}
+              />
+            </div>
 
-          <select
-            name="customerType"
-            value={form.customerType}
-            onChange={handleChange}
-          >
-            <option value="RETAIL">Retail</option>
-            <option value="WHOLESALE">Wholesale</option>
-          </select>
+            <div className="form-group">
+              <label>Business Name</label>
+              <input
+                name="businessName"
+                placeholder="Enter business name"
+                value={form.businessName}
+                onChange={handleChange}
+              />
+            </div>
 
-          <input
-            name="address"
-            placeholder="Address"
-            value={form.address}
-            onChange={handleChange}
-          />
+            <div className="form-group">
+              <label>GST Number</label>
+              <input
+                name="gstNumber"
+                placeholder="Enter GST number"
+                value={form.gstNumber}
+                onChange={handleChange}
+              />
+            </div>
 
-          <button type="submit" disabled={loading}>
-            {loading ? "Saving..." : "Add Customer"}
-          </button>
+            <div className="form-group">
+              <label>Customer Type *</label>
+              <select
+                name="customerType"
+                value={form.customerType}
+                onChange={handleChange}
+              >
+                <option value="RETAIL">Retail</option>
+                <option value="WHOLESALE">Wholesale</option>
+              </select>
+            </div>
 
-          <button
-            type="button"
-            className="secondary-button"
-            onClick={() => navigate("/customers")}
-          >
-            Cancel
-          </button>
+            <div className="form-group full-width">
+              <label>Address</label>
+              <input
+                name="address"
+                placeholder="Enter customer address"
+                value={form.address}
+                onChange={handleChange}
+              />
+            </div>
+
+          </div>
+
+          <div className="form-actions">
+            <button
+              type="submit"
+              className="primary-button"
+              disabled={loading}
+            >
+              {loading ? "Saving..." : "Save Customer"}
+            </button>
+
+            <button
+              type="button"
+              className="secondary-button"
+              onClick={() => navigate("/customers")}
+            >
+              Cancel
+            </button>
+          </div>
+
         </form>
       </div>
     </div>
