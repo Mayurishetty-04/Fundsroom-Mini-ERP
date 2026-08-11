@@ -120,6 +120,34 @@ The dashboard provides an overview of important operational information includin
 
 ---
 
+## Screenshots
+
+### Login
+
+![Login](screenshots/Login.png)
+
+### Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+### Customers
+
+![Customers](screenshots/customers.png)
+
+### Products
+
+![Products](screenshots/products.png)
+
+### Inventory
+
+![Inventory](screenshots/inventory.png)
+
+### Sales Challans
+
+![Sales Challans](screenshots/sales-challans.png)
+
+---
+
 ## Project Structure
 
 ```text
@@ -144,5 +172,13 @@ Fundsroom-Mini-ERP/
 │   │   └── ...
 │   ├── prisma/
 │   └── package.json
+│
+├── screenshots/
+│   ├── Login.png
+│   ├── dashboard.png
+│   ├── customers.png
+│   ├── products.png
+│   ├── inventory.png
+│   └── sales-challans.png
 │
 └── README.md
