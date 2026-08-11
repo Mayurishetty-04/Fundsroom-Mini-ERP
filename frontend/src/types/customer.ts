@@ -1,3 +1,16 @@
+export interface FollowUp {
+  id: string;
+  note: string;
+  followUpDate?: string;
+  createdAt: string;
+
+  createdBy?: {
+    id: string;
+    name: string;
+    role: string;
+  };
+}
+
 export interface Customer {
   id: string;
   customerName: string;
@@ -11,4 +24,6 @@ export interface Customer {
   followUpDate?: string;
   notes?: string;
   createdAt?: string;
+
+  followUps?: FollowUp[];
 }

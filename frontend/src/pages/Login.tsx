@@ -26,10 +26,12 @@ function Login() {
       );
 
       const token = response.data.data.token;
+const user = response.data.data.user;
 
-      localStorage.setItem("token", token);
+localStorage.setItem("token", token);
+localStorage.setItem("userRole", user.role);
 
-      navigate("/customers");
+navigate("/dashboard");
     } catch (error: any) {
       setError(
         error.response?.data?.message || "Invalid email or password"

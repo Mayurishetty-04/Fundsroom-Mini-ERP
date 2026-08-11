@@ -1,13 +1,14 @@
 import { Router } from "express";
+
 import {
-  addCustomer,
-  listCustomers,
-  getCustomer,
-  editCustomer,
-} from "../controllers/customer.controller";
+  addChallan,
+  listChallans,
+  getChallan,
+  confirm,
+} from "../controllers/challan.controller";
+
 import { authenticate } from "../middleware/auth.middleware";
 import { authorize } from "../middleware/role.middleware";
-import { addFollowUp } from "../controllers/followUp.controller";
 
 const router = Router();
 
@@ -15,32 +16,26 @@ router.use(authenticate);
 
 router.get(
   "/",
-  authorize("ADMIN", "SALES"),
-  listCustomers
-);
-
-router.post(
-  "/:id/followups",
-  authorize("ADMIN", "SALES"),
-  addFollowUp
+  authorize("ADMIN", "SALES", "WAREHOUSE", "ACCOUNTS"),
+  listChallans
 );
 
 router.get(
   "/:id",
-  authorize("ADMIN", "SALES"),
-  getCustomer
+  authorize("ADMIN", "SALES", "WAREHOUSE", "ACCOUNTS"),
+  getChallan
 );
 
 router.post(
   "/",
   authorize("ADMIN", "SALES"),
-  addCustomer
+  addChallan
 );
 
 router.put(
-  "/:id",
+  "/:id/confirm",
   authorize("ADMIN", "SALES"),
-  editCustomer
+  confirm
 );
 
 export default router;
