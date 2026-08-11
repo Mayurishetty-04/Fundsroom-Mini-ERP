@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api";
 
 function Login() {
   const navigate = useNavigate();
@@ -17,21 +17,18 @@ function Login() {
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await api.post("/auth/login", {
+        email,
+        password,
+      });
 
       const token = response.data.data.token;
-const user = response.data.data.user;
+      const user = response.data.data.user;
 
-localStorage.setItem("token", token);
-localStorage.setItem("userRole", user.role);
+      localStorage.setItem("token", token);
+      localStorage.setItem("userRole", user.role);
 
-navigate("/dashboard");
+      navigate("/dashboard");
     } catch (error: any) {
       setError(
         error.response?.data?.message || "Invalid email or password"
