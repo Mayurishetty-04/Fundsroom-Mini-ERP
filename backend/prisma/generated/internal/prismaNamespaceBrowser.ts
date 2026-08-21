@@ -57,7 +57,11 @@ export const ModelName = {
   Product: 'Product',
   StockMovement: 'StockMovement',
   Challan: 'Challan',
-  ChallanItem: 'ChallanItem'
+  ChallanItem: 'ChallanItem',
+  Batch: 'Batch',
+  Location: 'Location',
+  InventoryStock: 'InventoryStock',
+  WorkOrder: 'WorkOrder'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -175,6 +179,57 @@ export const ChallanItemScalarFieldEnum = {
 } as const
 
 export type ChallanItemScalarFieldEnum = (typeof ChallanItemScalarFieldEnum)[keyof typeof ChallanItemScalarFieldEnum]
+
+
+export const BatchScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  batchNumber: 'batchNumber',
+  expiryDate: 'expiryDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BatchScalarFieldEnum = (typeof BatchScalarFieldEnum)[keyof typeof BatchScalarFieldEnum]
+
+
+export const LocationScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type LocationScalarFieldEnum = (typeof LocationScalarFieldEnum)[keyof typeof LocationScalarFieldEnum]
+
+
+export const InventoryStockScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  locationId: 'locationId',
+  batchId: 'batchId',
+  physicalQuantity: 'physicalQuantity',
+  reservedQuantity: 'reservedQuantity',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InventoryStockScalarFieldEnum = (typeof InventoryStockScalarFieldEnum)[keyof typeof InventoryStockScalarFieldEnum]
+
+
+export const WorkOrderScalarFieldEnum = {
+  id: 'id',
+  locationId: 'locationId',
+  productId: 'productId',
+  requiredQuantity: 'requiredQuantity',
+  assignedUserId: 'assignedUserId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WorkOrderScalarFieldEnum = (typeof WorkOrderScalarFieldEnum)[keyof typeof WorkOrderScalarFieldEnum]
 
 
 export const SortOrder = {

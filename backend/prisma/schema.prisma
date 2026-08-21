@@ -38,6 +38,12 @@ enum ChallanStatus {
   CANCELLED
 }
 
+enum WorkOrderStatus {
+  ASSIGNED
+  IN_PROGRESS
+  COMPLETED
+}
+
 model User {
   id        String   @id @default(uuid()) @db.Uuid
   name      String
@@ -51,6 +57,7 @@ model User {
   followUps      CustomerFollowUp[] @relation("FollowUpCreatedBy")
   stockMovements StockMovement[]    @relation("StockMovementCreatedBy")
   challans       Challan[]          @relation("ChallanCreatedBy")
+  workOrders     WorkOrder[]        @relation("WorkOrderAssignedTo")
 }
 
 model Customer {
@@ -98,8 +105,11 @@ model Product {
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
 
-  stockMovements StockMovement[]
-  challanItems   ChallanItem[]
+  stockMovements  StockMovement[]
+  challanItems    ChallanItem[]
+  batches         Batch[]
+  inventoryStocks InventoryStock[]
+  workOrders      WorkOrder[]
 }
 
 model StockMovement {
@@ -142,4 +152,73 @@ model ChallanItem {
 
   challan Challan @relation(fields: [challanId], references: [id], onDelete: Cascade)
   product Product @relation(fields: [productId], references: [id])
+}
+
+model Batch {
+  id String @id @default(uuid()) @db.Uuid
+
+  productId   String    @db.Uuid
+  batchNumber String
+  expiryDate  DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  inventoryStocks InventoryStock[]
+
+  @@unique([productId, batchNumber])
+}
+
+model Location {
+  id String @id @default(uuid()) @db.Uuid
+
+  name String
+  code String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  inventoryStocks InventoryStock[]
+  workOrders      WorkOrder[]
+}
+
+model InventoryStock {
+  id String @id @default(uuid()) @db.Uuid
+
+  productId  String @db.Uuid
+  locationId String @db.Uuid
+  batchId    String @db.Uuid
+
+  physicalQuantity Int @default(0)
+  reservedQuantity Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  product  Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  location Location @relation(fields: [locationId], references: [id], onDelete: Cascade)
+  batch    Batch    @relation(fields: [batchId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, locationId, batchId])
+}
+
+model WorkOrder {
+  id String @id @default(uuid()) @db.Uuid
+
+  locationId       String @db.Uuid
+  productId        String @db.Uuid
+  requiredQuantity Int
+
+  assignedUserId String @db.Uuid
+
+  status WorkOrderStatus @default(ASSIGNED)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  location     Location @relation(fields: [locationId], references: [id])
+  product      Product  @relation(fields: [productId], references: [id])
+  assignedUser User     @relation("WorkOrderAssignedTo", fields: [assignedUserId], references: [id])
 }

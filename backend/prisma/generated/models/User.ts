@@ -202,6 +202,7 @@ export type UserWhereInput = {
   followUps?: Prisma.CustomerFollowUpListRelationFilter
   stockMovements?: Prisma.StockMovementListRelationFilter
   challans?: Prisma.ChallanListRelationFilter
+  workOrders?: Prisma.WorkOrderListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -216,6 +217,7 @@ export type UserOrderByWithRelationInput = {
   followUps?: Prisma.CustomerFollowUpOrderByRelationAggregateInput
   stockMovements?: Prisma.StockMovementOrderByRelationAggregateInput
   challans?: Prisma.ChallanOrderByRelationAggregateInput
+  workOrders?: Prisma.WorkOrderOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -233,6 +235,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   followUps?: Prisma.CustomerFollowUpListRelationFilter
   stockMovements?: Prisma.StockMovementListRelationFilter
   challans?: Prisma.ChallanListRelationFilter
+  workOrders?: Prisma.WorkOrderListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -273,6 +276,7 @@ export type UserCreateInput = {
   followUps?: Prisma.CustomerFollowUpCreateNestedManyWithoutCreatedByInput
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
   challans?: Prisma.ChallanCreateNestedManyWithoutCreatedByInput
+  workOrders?: Prisma.WorkOrderCreateNestedManyWithoutAssignedUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -287,6 +291,7 @@ export type UserUncheckedCreateInput = {
   followUps?: Prisma.CustomerFollowUpUncheckedCreateNestedManyWithoutCreatedByInput
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
   challans?: Prisma.ChallanUncheckedCreateNestedManyWithoutCreatedByInput
+  workOrders?: Prisma.WorkOrderUncheckedCreateNestedManyWithoutAssignedUserInput
 }
 
 export type UserUpdateInput = {
@@ -301,6 +306,7 @@ export type UserUpdateInput = {
   followUps?: Prisma.CustomerFollowUpUpdateManyWithoutCreatedByNestedInput
   stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
   challans?: Prisma.ChallanUpdateManyWithoutCreatedByNestedInput
+  workOrders?: Prisma.WorkOrderUpdateManyWithoutAssignedUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -315,6 +321,7 @@ export type UserUncheckedUpdateInput = {
   followUps?: Prisma.CustomerFollowUpUncheckedUpdateManyWithoutCreatedByNestedInput
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
   challans?: Prisma.ChallanUncheckedUpdateManyWithoutCreatedByNestedInput
+  workOrders?: Prisma.WorkOrderUncheckedUpdateManyWithoutAssignedUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -457,6 +464,20 @@ export type UserUpdateOneRequiredWithoutChallansNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutChallansInput, Prisma.UserUpdateWithoutChallansInput>, Prisma.UserUncheckedUpdateWithoutChallansInput>
 }
 
+export type UserCreateNestedOneWithoutWorkOrdersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutWorkOrdersInput, Prisma.UserUncheckedCreateWithoutWorkOrdersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWorkOrdersInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutWorkOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutWorkOrdersInput, Prisma.UserUncheckedCreateWithoutWorkOrdersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWorkOrdersInput
+  upsert?: Prisma.UserUpsertWithoutWorkOrdersInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutWorkOrdersInput, Prisma.UserUpdateWithoutWorkOrdersInput>, Prisma.UserUncheckedUpdateWithoutWorkOrdersInput>
+}
+
 export type UserCreateWithoutCustomersInput = {
   id?: string
   name: string
@@ -468,6 +489,7 @@ export type UserCreateWithoutCustomersInput = {
   followUps?: Prisma.CustomerFollowUpCreateNestedManyWithoutCreatedByInput
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
   challans?: Prisma.ChallanCreateNestedManyWithoutCreatedByInput
+  workOrders?: Prisma.WorkOrderCreateNestedManyWithoutAssignedUserInput
 }
 
 export type UserUncheckedCreateWithoutCustomersInput = {
@@ -481,6 +503,7 @@ export type UserUncheckedCreateWithoutCustomersInput = {
   followUps?: Prisma.CustomerFollowUpUncheckedCreateNestedManyWithoutCreatedByInput
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
   challans?: Prisma.ChallanUncheckedCreateNestedManyWithoutCreatedByInput
+  workOrders?: Prisma.WorkOrderUncheckedCreateNestedManyWithoutAssignedUserInput
 }
 
 export type UserCreateOrConnectWithoutCustomersInput = {
@@ -510,6 +533,7 @@ export type UserUpdateWithoutCustomersInput = {
   followUps?: Prisma.CustomerFollowUpUpdateManyWithoutCreatedByNestedInput
   stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
   challans?: Prisma.ChallanUpdateManyWithoutCreatedByNestedInput
+  workOrders?: Prisma.WorkOrderUpdateManyWithoutAssignedUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCustomersInput = {
@@ -523,6 +547,7 @@ export type UserUncheckedUpdateWithoutCustomersInput = {
   followUps?: Prisma.CustomerFollowUpUncheckedUpdateManyWithoutCreatedByNestedInput
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
   challans?: Prisma.ChallanUncheckedUpdateManyWithoutCreatedByNestedInput
+  workOrders?: Prisma.WorkOrderUncheckedUpdateManyWithoutAssignedUserNestedInput
 }
 
 export type UserCreateWithoutFollowUpsInput = {
@@ -536,6 +561,7 @@ export type UserCreateWithoutFollowUpsInput = {
   customers?: Prisma.CustomerCreateNestedManyWithoutCreatedByInput
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
   challans?: Prisma.ChallanCreateNestedManyWithoutCreatedByInput
+  workOrders?: Prisma.WorkOrderCreateNestedManyWithoutAssignedUserInput
 }
 
 export type UserUncheckedCreateWithoutFollowUpsInput = {
@@ -549,6 +575,7 @@ export type UserUncheckedCreateWithoutFollowUpsInput = {
   customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutCreatedByInput
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
   challans?: Prisma.ChallanUncheckedCreateNestedManyWithoutCreatedByInput
+  workOrders?: Prisma.WorkOrderUncheckedCreateNestedManyWithoutAssignedUserInput
 }
 
 export type UserCreateOrConnectWithoutFollowUpsInput = {
@@ -578,6 +605,7 @@ export type UserUpdateWithoutFollowUpsInput = {
   customers?: Prisma.CustomerUpdateManyWithoutCreatedByNestedInput
   stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
   challans?: Prisma.ChallanUpdateManyWithoutCreatedByNestedInput
+  workOrders?: Prisma.WorkOrderUpdateManyWithoutAssignedUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFollowUpsInput = {
@@ -591,6 +619,7 @@ export type UserUncheckedUpdateWithoutFollowUpsInput = {
   customers?: Prisma.CustomerUncheckedUpdateManyWithoutCreatedByNestedInput
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
   challans?: Prisma.ChallanUncheckedUpdateManyWithoutCreatedByNestedInput
+  workOrders?: Prisma.WorkOrderUncheckedUpdateManyWithoutAssignedUserNestedInput
 }
 
 export type UserCreateWithoutStockMovementsInput = {
@@ -604,6 +633,7 @@ export type UserCreateWithoutStockMovementsInput = {
   customers?: Prisma.CustomerCreateNestedManyWithoutCreatedByInput
   followUps?: Prisma.CustomerFollowUpCreateNestedManyWithoutCreatedByInput
   challans?: Prisma.ChallanCreateNestedManyWithoutCreatedByInput
+  workOrders?: Prisma.WorkOrderCreateNestedManyWithoutAssignedUserInput
 }
 
 export type UserUncheckedCreateWithoutStockMovementsInput = {
@@ -617,6 +647,7 @@ export type UserUncheckedCreateWithoutStockMovementsInput = {
   customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutCreatedByInput
   followUps?: Prisma.CustomerFollowUpUncheckedCreateNestedManyWithoutCreatedByInput
   challans?: Prisma.ChallanUncheckedCreateNestedManyWithoutCreatedByInput
+  workOrders?: Prisma.WorkOrderUncheckedCreateNestedManyWithoutAssignedUserInput
 }
 
 export type UserCreateOrConnectWithoutStockMovementsInput = {
@@ -646,6 +677,7 @@ export type UserUpdateWithoutStockMovementsInput = {
   customers?: Prisma.CustomerUpdateManyWithoutCreatedByNestedInput
   followUps?: Prisma.CustomerFollowUpUpdateManyWithoutCreatedByNestedInput
   challans?: Prisma.ChallanUpdateManyWithoutCreatedByNestedInput
+  workOrders?: Prisma.WorkOrderUpdateManyWithoutAssignedUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStockMovementsInput = {
@@ -659,6 +691,7 @@ export type UserUncheckedUpdateWithoutStockMovementsInput = {
   customers?: Prisma.CustomerUncheckedUpdateManyWithoutCreatedByNestedInput
   followUps?: Prisma.CustomerFollowUpUncheckedUpdateManyWithoutCreatedByNestedInput
   challans?: Prisma.ChallanUncheckedUpdateManyWithoutCreatedByNestedInput
+  workOrders?: Prisma.WorkOrderUncheckedUpdateManyWithoutAssignedUserNestedInput
 }
 
 export type UserCreateWithoutChallansInput = {
@@ -672,6 +705,7 @@ export type UserCreateWithoutChallansInput = {
   customers?: Prisma.CustomerCreateNestedManyWithoutCreatedByInput
   followUps?: Prisma.CustomerFollowUpCreateNestedManyWithoutCreatedByInput
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  workOrders?: Prisma.WorkOrderCreateNestedManyWithoutAssignedUserInput
 }
 
 export type UserUncheckedCreateWithoutChallansInput = {
@@ -685,6 +719,7 @@ export type UserUncheckedCreateWithoutChallansInput = {
   customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutCreatedByInput
   followUps?: Prisma.CustomerFollowUpUncheckedCreateNestedManyWithoutCreatedByInput
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  workOrders?: Prisma.WorkOrderUncheckedCreateNestedManyWithoutAssignedUserInput
 }
 
 export type UserCreateOrConnectWithoutChallansInput = {
@@ -714,6 +749,7 @@ export type UserUpdateWithoutChallansInput = {
   customers?: Prisma.CustomerUpdateManyWithoutCreatedByNestedInput
   followUps?: Prisma.CustomerFollowUpUpdateManyWithoutCreatedByNestedInput
   stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  workOrders?: Prisma.WorkOrderUpdateManyWithoutAssignedUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutChallansInput = {
@@ -727,6 +763,79 @@ export type UserUncheckedUpdateWithoutChallansInput = {
   customers?: Prisma.CustomerUncheckedUpdateManyWithoutCreatedByNestedInput
   followUps?: Prisma.CustomerFollowUpUncheckedUpdateManyWithoutCreatedByNestedInput
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  workOrders?: Prisma.WorkOrderUncheckedUpdateManyWithoutAssignedUserNestedInput
+}
+
+export type UserCreateWithoutWorkOrdersInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role: $Enums.UserRole
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  customers?: Prisma.CustomerCreateNestedManyWithoutCreatedByInput
+  followUps?: Prisma.CustomerFollowUpCreateNestedManyWithoutCreatedByInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  challans?: Prisma.ChallanCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserUncheckedCreateWithoutWorkOrdersInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role: $Enums.UserRole
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutCreatedByInput
+  followUps?: Prisma.CustomerFollowUpUncheckedCreateNestedManyWithoutCreatedByInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  challans?: Prisma.ChallanUncheckedCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserCreateOrConnectWithoutWorkOrdersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutWorkOrdersInput, Prisma.UserUncheckedCreateWithoutWorkOrdersInput>
+}
+
+export type UserUpsertWithoutWorkOrdersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutWorkOrdersInput, Prisma.UserUncheckedUpdateWithoutWorkOrdersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutWorkOrdersInput, Prisma.UserUncheckedCreateWithoutWorkOrdersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutWorkOrdersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutWorkOrdersInput, Prisma.UserUncheckedUpdateWithoutWorkOrdersInput>
+}
+
+export type UserUpdateWithoutWorkOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  customers?: Prisma.CustomerUpdateManyWithoutCreatedByNestedInput
+  followUps?: Prisma.CustomerFollowUpUpdateManyWithoutCreatedByNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  challans?: Prisma.ChallanUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutWorkOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutCreatedByNestedInput
+  followUps?: Prisma.CustomerFollowUpUncheckedUpdateManyWithoutCreatedByNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  challans?: Prisma.ChallanUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 
@@ -739,6 +848,7 @@ export type UserCountOutputType = {
   followUps: number
   stockMovements: number
   challans: number
+  workOrders: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -746,6 +856,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   followUps?: boolean | UserCountOutputTypeCountFollowUpsArgs
   stockMovements?: boolean | UserCountOutputTypeCountStockMovementsArgs
   challans?: boolean | UserCountOutputTypeCountChallansArgs
+  workOrders?: boolean | UserCountOutputTypeCountWorkOrdersArgs
 }
 
 /**
@@ -786,6 +897,13 @@ export type UserCountOutputTypeCountChallansArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.ChallanWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountWorkOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WorkOrderWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -799,6 +917,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   followUps?: boolean | Prisma.User$followUpsArgs<ExtArgs>
   stockMovements?: boolean | Prisma.User$stockMovementsArgs<ExtArgs>
   challans?: boolean | Prisma.User$challansArgs<ExtArgs>
+  workOrders?: boolean | Prisma.User$workOrdersArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -838,6 +957,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   followUps?: boolean | Prisma.User$followUpsArgs<ExtArgs>
   stockMovements?: boolean | Prisma.User$stockMovementsArgs<ExtArgs>
   challans?: boolean | Prisma.User$challansArgs<ExtArgs>
+  workOrders?: boolean | Prisma.User$workOrdersArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -850,6 +970,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     followUps: Prisma.$CustomerFollowUpPayload<ExtArgs>[]
     stockMovements: Prisma.$StockMovementPayload<ExtArgs>[]
     challans: Prisma.$ChallanPayload<ExtArgs>[]
+    workOrders: Prisma.$WorkOrderPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1257,6 +1378,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   followUps<T extends Prisma.User$followUpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$followUpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CustomerFollowUpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stockMovements<T extends Prisma.User$stockMovementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stockMovementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockMovementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   challans<T extends Prisma.User$challansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$challansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChallanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  workOrders<T extends Prisma.User$workOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$workOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorkOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1779,6 +1901,30 @@ export type User$challansArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.ChallanScalarFieldEnum | Prisma.ChallanScalarFieldEnum[]
+}
+
+/**
+ * User.workOrders
+ */
+export type User$workOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WorkOrder
+   */
+  select?: Prisma.WorkOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WorkOrder
+   */
+  omit?: Prisma.WorkOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WorkOrderInclude<ExtArgs> | null
+  where?: Prisma.WorkOrderWhereInput
+  orderBy?: Prisma.WorkOrderOrderByWithRelationInput | Prisma.WorkOrderOrderByWithRelationInput[]
+  cursor?: Prisma.WorkOrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WorkOrderScalarFieldEnum | Prisma.WorkOrderScalarFieldEnum[]
 }
 
 /**

@@ -52,3 +52,12 @@ export const ChallanStatus = {
 } as const
 
 export type ChallanStatus = (typeof ChallanStatus)[keyof typeof ChallanStatus]
+
+
+export const WorkOrderStatus = {
+  ASSIGNED: 'ASSIGNED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED'
+} as const
+
+export type WorkOrderStatus = (typeof WorkOrderStatus)[keyof typeof WorkOrderStatus]

@@ -74,3 +74,23 @@ export type Challan = Prisma.ChallanModel
  * 
  */
 export type ChallanItem = Prisma.ChallanItemModel
+/**
+ * Model Batch
+ * 
+ */
+export type Batch = Prisma.BatchModel
+/**
+ * Model Location
+ * 
+ */
+export type Location = Prisma.LocationModel
+/**
+ * Model InventoryStock
+ * 
+ */
+export type InventoryStock = Prisma.InventoryStockModel
+/**
+ * Model WorkOrder
+ * 
+ */
+export type WorkOrder = Prisma.WorkOrderModel
